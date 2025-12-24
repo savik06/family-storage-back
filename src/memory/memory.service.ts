@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Memory } from 'generated/prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateMemoryDto } from './memory.dto';
 

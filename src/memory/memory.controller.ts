@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { MemoryService } from './memory.service';
-import type { Memory } from 'generated/prisma/client';
+import type { Memory } from '../../generated/prisma/client';
 import { CreateMemoryDto } from './memory.dto';
 
 @Controller('memory')
