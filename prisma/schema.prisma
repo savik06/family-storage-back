@@ -1,0 +1,36 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Memory {
+  id  String  @id @default(uuid())
+  title String?
+  images  String[] @default([])
+  text  String
+  creatorId String
+  creator User @relation(fields: [creatorId], references: [id], name: "CreatorRelation")
+  relativesId String[]
+  relatives User[] @relation("MemoryRelatives")
+}
+
+model User {
+  id              String   @id @default(uuid())
+  name            String
+  surname         String
+  middlename      String
+  birthDate       String
+  images          String[] @default([])
+  livePosition    String?
+  parentsId       String[] @default([])
+  hobbies         String[] @default([])
+  specializations String[] @default([])
+  achievements    String[] @default([])
+  memories  Memory[] @relation("MemoryRelatives")
+  createdMemories Memory[] @relation("CreatorRelation")
+}
