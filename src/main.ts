@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT || 3002;
   app.enableCors({
-    origin: ["http://localhost:3000", "family-storage-cctn.vercel.app"],
+    origin: ["http://localhost:3000", "https://family-storage-cctn.vercel.app"],
     credentials: true,
   })
   await app.listen(port);
