@@ -6,34 +6,34 @@ export declare class MemoryService {
     createMemory(data: CreateMemoryDto): Promise<{
         creator: {
             id: string;
-            images: string[];
+            livePosition: string | null;
+            hobbies: string[];
+            specializations: string[];
+            achievements: string[];
             name: string;
             surname: string;
             middlename: string;
             birthDate: string;
-            livePosition: string | null;
+            images: string[];
             parentsId: string[];
-            hobbies: string[];
-            specializations: string[];
-            achievements: string[];
         };
         relatives: {
             id: string;
-            images: string[];
+            livePosition: string | null;
+            hobbies: string[];
+            specializations: string[];
+            achievements: string[];
             name: string;
             surname: string;
             middlename: string;
             birthDate: string;
-            livePosition: string | null;
+            images: string[];
             parentsId: string[];
-            hobbies: string[];
-            specializations: string[];
-            achievements: string[];
         }[];
     } & {
         id: string;
-        title: string | null;
         images: string[];
+        title: string | null;
         text: string;
         creatorId: string;
         relativesId: string[];
@@ -41,34 +41,34 @@ export declare class MemoryService {
     findAllMemories(): Promise<({
         creator: {
             id: string;
-            images: string[];
+            livePosition: string | null;
+            hobbies: string[];
+            specializations: string[];
+            achievements: string[];
             name: string;
             surname: string;
             middlename: string;
             birthDate: string;
-            livePosition: string | null;
+            images: string[];
             parentsId: string[];
-            hobbies: string[];
-            specializations: string[];
-            achievements: string[];
         };
         relatives: {
             id: string;
-            images: string[];
+            livePosition: string | null;
+            hobbies: string[];
+            specializations: string[];
+            achievements: string[];
             name: string;
             surname: string;
             middlename: string;
             birthDate: string;
-            livePosition: string | null;
+            images: string[];
             parentsId: string[];
-            hobbies: string[];
-            specializations: string[];
-            achievements: string[];
         }[];
     } & {
         id: string;
-        title: string | null;
         images: string[];
+        title: string | null;
         text: string;
         creatorId: string;
         relativesId: string[];
