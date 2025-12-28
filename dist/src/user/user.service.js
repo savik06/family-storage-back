@@ -12,14 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const upload_service_1 = require("../upload/upload.service");
 let UserService = class UserService {
     prisma;
-    constructor(prisma) {
+    upload;
+    constructor(prisma, upload) {
         this.prisma = prisma;
+        this.upload = upload;
     }
-    async createUser(user) {
+    async createUser(user, images) {
+        const imagesLinks = await this.upload.uploadImages(images);
         return this.prisma.user.create({
-            data: user,
+            data: {
+                ...user,
+                images: imagesLinks.images,
+            },
         });
     }
     async findUserById(id) {
@@ -40,15 +47,25 @@ let UserService = class UserService {
         }
         return user;
     }
-    async updateUserData(data) {
+    async updateUserData(data, images) {
         const { id, ...rest } = data;
         const user = await this.findUserById(id);
         if (!user) {
             throw new common_1.NotFoundException('Пользователь не найден');
         }
+        let imagesLinks = [];
+        if (images && images.length > 0) {
+            const uploadedImages = await this.upload.uploadImages(images);
+            imagesLinks = uploadedImages.images;
+        }
         const updatedUser = await this.prisma.user.update({
             where: { id },
-            data: rest,
+            data: {
+                ...rest,
+                images: imagesLinks.length > 0
+                    ? [...user.images, ...imagesLinks]
+                    : user.images,
+            },
         });
         return updatedUser;
     }
@@ -58,10 +75,17 @@ let UserService = class UserService {
     async findAllUsers() {
         return this.prisma.user.findMany();
     }
+    async uploadPhoto(data) {
+        const apikey = "5066accd614945d07854c3821c76df24";
+        const version = "1.0.1";
+        const name = "image_cursion";
+        const type = "jpg";
+        const image = "";
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService, upload_service_1.UploadService])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

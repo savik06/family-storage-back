@@ -15,14 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MemoryController = void 0;
 const common_1 = require("@nestjs/common");
 const memory_service_1 = require("./memory.service");
-const memory_dto_1 = require("./memory.dto");
+const platform_express_1 = require("@nestjs/platform-express");
 let MemoryController = class MemoryController {
     memoryService;
     constructor(memoryService) {
         this.memoryService = memoryService;
     }
-    createMemory(data) {
-        return this.memoryService.createMemory(data);
+    createMemory(images, body) {
+        const data = body.params ? JSON.parse(body.params) : null;
+        return this.memoryService.createMemory(data, images);
     }
     findAllMemories() {
         return this.memoryService.findAllMemories();
@@ -31,9 +32,11 @@ let MemoryController = class MemoryController {
 exports.MemoryController = MemoryController;
 __decorate([
     (0, common_1.Post)('create'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('files')),
+    __param(0, (0, common_1.UploadedFiles)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [memory_dto_1.CreateMemoryDto]),
+    __metadata("design:paramtypes", [Array, Object]),
     __metadata("design:returntype", Promise)
 ], MemoryController.prototype, "createMemory", null);
 __decorate([

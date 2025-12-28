@@ -6,20 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModule = void 0;
+exports.UploadModule = void 0;
 const common_1 = require("@nestjs/common");
-const user_service_1 = require("./user.service");
-const user_controller_1 = require("./user.controller");
+const upload_service_1 = require("./upload.service");
+const upload_controller_1 = require("./upload.controller");
 const prisma_service_1 = require("../prisma/prisma.service");
-const upload_module_1 = require("../upload/upload.module");
-let UserModule = class UserModule {
+let UploadModule = class UploadModule {
 };
-exports.UserModule = UserModule;
-exports.UserModule = UserModule = __decorate([
+exports.UploadModule = UploadModule;
+exports.UploadModule = UploadModule = __decorate([
     (0, common_1.Module)({
-        imports: [upload_module_1.UploadModule],
-        controllers: [user_controller_1.UserController],
-        providers: [user_service_1.UserService, prisma_service_1.PrismaService],
+        controllers: [upload_controller_1.UploadController],
+        providers: [upload_service_1.UploadService, prisma_service_1.PrismaService],
+        exports: [upload_service_1.UploadService],
     })
-], UserModule);
-//# sourceMappingURL=user.module.js.map
+], UploadModule);
+//# sourceMappingURL=upload.module.js.map

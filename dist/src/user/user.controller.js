@@ -15,14 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
-const user_dto_1 = require("./user.dto");
+const platform_express_1 = require("@nestjs/platform-express");
 let UserController = class UserController {
     userService;
     constructor(userService) {
         this.userService = userService;
     }
-    createUser(user) {
-        return this.userService.createUser(user);
+    createUser(images, body) {
+        const data = body.params ? JSON.parse(body.params) : null;
+        return this.userService.createUser(data, images);
     }
     findUserById(id) {
         return this.userService.findUserById(id);
@@ -30,8 +31,9 @@ let UserController = class UserController {
     findAllUsers() {
         return this.userService.findAllUsers();
     }
-    updateUserData(data) {
-        return this.userService.updateUserData(data);
+    updateUserData(images, body) {
+        const data = body.params ? JSON.parse(body.params) : body;
+        return this.userService.updateUserData(data, images);
     }
     deleteAllUsers() {
         return this.userService.deleteAllUsers();
@@ -40,9 +42,11 @@ let UserController = class UserController {
 exports.UserController = UserController;
 __decorate([
     (0, common_1.Post)('create'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('files')),
+    __param(0, (0, common_1.UploadedFiles)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Array, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "createUser", null);
 __decorate([
@@ -60,9 +64,11 @@ __decorate([
 ], UserController.prototype, "findAllUsers", null);
 __decorate([
     (0, common_1.Patch)('update'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('files')),
+    __param(0, (0, common_1.UploadedFiles)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_dto_1.UpdateUserDto]),
+    __metadata("design:paramtypes", [Array, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUserData", null);
 __decorate([

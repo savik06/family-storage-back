@@ -12,18 +12,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MemoryService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const upload_service_1 = require("../upload/upload.service");
 let MemoryService = class MemoryService {
+    upload;
     prisma;
-    constructor(prisma) {
+    constructor(upload, prisma) {
+        this.upload = upload;
         this.prisma = prisma;
     }
-    async createMemory(data) {
-        const { title, images = [], text, creatorId, relativesId } = data;
+    async createMemory(data, images) {
+        const imagesLinks = await this.upload.uploadImages(images);
+        const { title, text, creatorId, relativesId } = data;
         return this.prisma.memory.create({
             data: {
                 title,
-                images,
                 text,
+                images: imagesLinks.images,
                 creator: {
                     connect: {
                         id: creatorId
@@ -51,6 +55,6 @@ let MemoryService = class MemoryService {
 exports.MemoryService = MemoryService;
 exports.MemoryService = MemoryService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [upload_service_1.UploadService, prisma_service_1.PrismaService])
 ], MemoryService);
 //# sourceMappingURL=memory.service.js.map

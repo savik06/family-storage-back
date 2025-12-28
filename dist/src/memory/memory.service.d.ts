@@ -1,9 +1,11 @@
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateMemoryDto } from './memory.dto';
+import { UploadService } from 'src/upload/upload.service';
 export declare class MemoryService {
+    private readonly upload;
     private readonly prisma;
-    constructor(prisma: PrismaService);
-    createMemory(data: CreateMemoryDto): Promise<{
+    constructor(upload: UploadService, prisma: PrismaService);
+    createMemory(data: CreateMemoryDto, images: Express.Multer.File[]): Promise<{
         creator: {
             id: string;
             livePosition: string | null;

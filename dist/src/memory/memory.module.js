@@ -11,11 +11,13 @@ const common_1 = require("@nestjs/common");
 const memory_service_1 = require("./memory.service");
 const memory_controller_1 = require("./memory.controller");
 const prisma_service_1 = require("../prisma/prisma.service");
+const upload_module_1 = require("../upload/upload.module");
 let MemoryModule = class MemoryModule {
 };
 exports.MemoryModule = MemoryModule;
 exports.MemoryModule = MemoryModule = __decorate([
     (0, common_1.Module)({
+        imports: [upload_module_1.UploadModule],
         controllers: [memory_controller_1.MemoryController],
         providers: [memory_service_1.MemoryService, prisma_service_1.PrismaService],
     })
