@@ -8,44 +8,44 @@ export declare class UserService {
     constructor(prisma: PrismaService, upload: UploadService);
     createUser(user: User, images: Express.Multer.File[]): Promise<{
         id: string;
+        livePosition: string | null;
+        hobbies: string[];
+        specializations: string[];
+        achievements: string[];
         name: string;
         surname: string;
         middlename: string;
         birthDate: string;
         images: string[];
-        livePosition: string | null;
         parentsId: string[];
-        hobbies: string[];
-        specializations: string[];
-        achievements: string[];
     }>;
     findUserById(id: string): Promise<{
         memories: ({
             creator: {
                 id: string;
+                livePosition: string | null;
+                hobbies: string[];
+                specializations: string[];
+                achievements: string[];
                 name: string;
                 surname: string;
                 middlename: string;
                 birthDate: string;
                 images: string[];
-                livePosition: string | null;
                 parentsId: string[];
-                hobbies: string[];
-                specializations: string[];
-                achievements: string[];
             };
             relatives: {
                 id: string;
+                livePosition: string | null;
+                hobbies: string[];
+                specializations: string[];
+                achievements: string[];
                 name: string;
                 surname: string;
                 middlename: string;
                 birthDate: string;
                 images: string[];
-                livePosition: string | null;
                 parentsId: string[];
-                hobbies: string[];
-                specializations: string[];
-                achievements: string[];
             }[];
         } & {
             id: string;
@@ -65,43 +65,43 @@ export declare class UserService {
         }[];
     } & {
         id: string;
+        livePosition: string | null;
+        hobbies: string[];
+        specializations: string[];
+        achievements: string[];
         name: string;
         surname: string;
         middlename: string;
         birthDate: string;
         images: string[];
-        livePosition: string | null;
         parentsId: string[];
-        hobbies: string[];
-        specializations: string[];
-        achievements: string[];
     }>;
     updateUserData(data: UpdateUserDto, images?: Express.Multer.File[]): Promise<{
         id: string;
+        livePosition: string | null;
+        hobbies: string[];
+        specializations: string[];
+        achievements: string[];
         name: string;
         surname: string;
         middlename: string;
         birthDate: string;
         images: string[];
-        livePosition: string | null;
         parentsId: string[];
-        hobbies: string[];
-        specializations: string[];
-        achievements: string[];
     }>;
     deleteAllUsers(): Promise<void>;
     findAllUsers(): Promise<{
         id: string;
+        livePosition: string | null;
+        hobbies: string[];
+        specializations: string[];
+        achievements: string[];
         name: string;
         surname: string;
         middlename: string;
         birthDate: string;
         images: string[];
-        livePosition: string | null;
         parentsId: string[];
-        hobbies: string[];
-        specializations: string[];
-        achievements: string[];
     }[]>;
     uploadPhoto(data: any): Promise<void>;
 }
